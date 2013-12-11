@@ -405,7 +405,7 @@ class SesameClient extends Object
 		$request->headers['Accept'] = self::OUTPUT_MIME_SPARQL_XML;
 
 		try {
-			$response = $request->post();
+			$response = $request->get();
 		} catch (Curl\BadStatusException $e) {
 			throw new BadStatusException('Failed to run query, HTTP response error: ' . $e->getCode(), $e->getCode(), $e);
 		}
@@ -430,7 +430,7 @@ class SesameClient extends Object
 		$request->headers['Accept'] = 'text/plain';
 
 		try {
-			$response = $request->post();
+			$response = $request->get();
 		} catch (Curl\BadStatusException $e) {
 			throw new BadStatusException('Failed to run query, HTTP response error: ' . $e->getCode(), $e->getCode(), $e);
 		}
