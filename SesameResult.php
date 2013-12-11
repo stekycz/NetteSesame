@@ -1,6 +1,6 @@
 <?php
 
-class phpSesame_SparqlRes
+class SesameResult
 {
 	private $xml;
 
@@ -76,4 +76,3 @@ class phpSesame_SparqlRes
 		return false;
 	}
 }
-?>

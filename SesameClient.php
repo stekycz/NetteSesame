@@ -1,12 +1,4 @@
 <?php
-/**
-*
-*@package phpSesame
-*/
-
-require_once "HTTP/Request2.php";//The PEAR base directory must be in your include_path
-
-require_once "resultFormats.php";
 
 /**
  * This Class is an interface to Sesame. It connects and perform queries through http.
@@ -21,7 +13,7 @@ require_once "resultFormats.php";
  * @author Alex Latchford
  * @version 0.1
  */
-class phpSesame
+class SesameClient
 {
 	// Return MIME types
 	const SPARQL_XML = 'application/sparql-results+xml';
@@ -74,7 +66,7 @@ class phpSesame
 	/**
 	 * Gets a list of all the available repositories on the Sesame installation
 	 *
-	 * @return	phpSesame_SparqlRes
+	 * @return	SesameResult
 	 */
 	public function listRepositories()
 	{
@@ -87,7 +79,7 @@ class phpSesame
 			throw new Exception ('Phesame engine response error');
 		}
 
-		return new phpSesame_SparqlRes($response->getBody());
+		return new SesameResult($response->getBody());
 	}
 
 	private function checkRepository()
@@ -153,7 +145,7 @@ class phpSesame
 	 * @param	string	$queryLang		Language used for querying, SPARQL and SeRQL supported
 	 * @param	bool	$infer			Use inference in the query
 	 *
-	 * @return	phpSesame_SparqlRes
+	 * @return	SesameResult
 	 */
 	public function query($query, $resultFormat = self::SPARQL_XML, $queryLang = 'sparql', $infer = true)
 	{
@@ -173,7 +165,7 @@ class phpSesame
 			throw new Exception ('Failed to run query, HTTP response error: ' . $response->getStatus());
 		}
 
-		return new phpSesame_SparqlRes($response->getBody());
+		return new SesameResult($response->getBody());
 	}
 
 	/**
@@ -350,7 +342,7 @@ class phpSesame
 	 *
 	 * @param	string	$resultFormat	Returned result format, see const definitions for supported list.
 	 *
-	 * @return	phpSesame_SparqlRes
+	 * @return	SesameResult
 	 */
 	public function contexts($resultFormat = self::SPARQL_XML)
 	{
@@ -366,7 +358,7 @@ class phpSesame
 			throw new Exception ('Failed to run query, HTTP response error: ' . $response->getStatus());
 		}
 
-		return new phpSesame_SparqlRes($response->getBody());
+		return new SesameResult($response->getBody());
 	}
 
 	/**
@@ -412,4 +404,3 @@ class phpSesame
 		}
 	}
 }
-?>
