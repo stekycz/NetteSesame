@@ -173,13 +173,14 @@ class SesameClient extends Object
 
 		$request = new Curl\Request($this->dsn . '/repositories/' . $this->repository);
 		$request->headers['Accept'] = self::OUTPUT_MIME_SPARQL_XML;
+		$request->headers['Content-type'] = "application/x-www-form-urlencoded"; // Required for POST requests
 
 		try {
-			$response = $request->post(array(
+			$response = $request->post(http_build_query(array(
 				'query' => $query,
 				'queryLn' => $queryLang,
 				'infer' => $infer,
-			));
+			)));
 		} catch (Curl\BadStatusException $e) {
 			throw new BadStatusException('Failed to run query, HTTP response error: ' . $e->getCode(), $e->getCode(), $e);
 		}
