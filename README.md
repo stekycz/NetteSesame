@@ -9,13 +9,44 @@
 
 Client library for Sesame 2.x which utilises the REST API that it implements.
 
-It requires **PHP >= 5.3.3** and **Nette Framework >= 2.0.0**.
+It requires:
+
+ - **PHP >= 5.3.3**
+ - **Nette Framework >= 2.0.0**
+ - **Kdyby/Curl >= 1.0.0**
+
+## Installation
+
+```bash
+$ composer require stekycz/nette-sesame
+```
 
 ## Usage
 
 I am assuming at this point you have installed and configured Sesame, have a repository set up and the REST API functioning correctly.
 
-**@todo:** Another usage notes will follow.
+### Extension registration
+
+#### Nette >= 2.1
+
+```yaml
+extensions:
+    sesame: stekycz\NetteSesame\DI\SesameExtension
+```
+
+#### Nette < 2.1
+
+```php
+stekycz\NetteSesame\DI\SesameExtension::register($configurator);
+```
+
+### Configuration
+
+```yaml
+sesame:
+    dsl: http://localhost:8080/openrdf-sesame
+    repository: null
+```
 
 ## Author
 
