@@ -2,20 +2,22 @@
 
 namespace stekycz\NetteSesame\DI;
 
-use Nette\DI\Compiler;
-use Nette\DI\CompilerExtension;
-use Nette\Configurator;
+use Nette;
 use Nette\Utils\Validators;
 
-if (!class_exists('Nette\Config\CompilerExtension')) {
-	class_alias('Nette\DI\CompilerExtension', 'Nette\Config\CompilerExtension');
-	class_alias('Nette\Configurator', 'Nette\Config\Configurator');
-	class_alias('Nette\DI\Compiler', 'Nette\Config\Compiler');
+
+
+if (!class_exists('Nette\DI\CompilerExtension')) {
+	class_alias('Nette\Config\CompilerExtension', 'Nette\DI\CompilerExtension');
+	class_alias('Nette\Config\Compiler', 'Nette\DI\Compiler');
 }
 
+if (isset(Nette\Loaders\NetteLoader::getInstance()->renamed['Nette\Configurator']) || !class_exists('Nette\Configurator')) {
+	unset(Nette\Loaders\NetteLoader::getInstance()->renamed['Nette\Configurator']); // fuck you
+	class_alias('Nette\Config\Configurator', 'Nette\Configurator');
+}
 
-
-class SesameExtension extends CompilerExtension
+class SesameExtension extends Nette\DI\CompilerExtension
 {
 
 	/**
@@ -48,9 +50,9 @@ class SesameExtension extends CompilerExtension
 	/**
 	 * @param \Nette\Configurator $configurator
 	 */
-	public static function register(Configurator $configurator)
+	public static function register(Nette\Configurator $configurator)
 	{
-		$configurator->onCompile[] = function (Configurator $config, Compiler $compiler) {
+		$configurator->onCompile[] = function (Nette\Configurator $config, Nette\DI\Compiler $compiler) {
 			$compiler->addExtension('sesame', new self());
 		};
 	}
