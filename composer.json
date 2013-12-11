@@ -25,7 +25,7 @@
 			"stekycz\\NetteSesame": "src/"
 		},
 		"classmap": [
-			"src/exceptions.php"
+			"src/stekycz/NetteSesame/exceptions.php"
 		]
 	}
 }
