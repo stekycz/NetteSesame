@@ -16,6 +16,7 @@
 		"issues": "https://github.com/stekycz/NetteSesame/issues",
 		"source": "https://github.com/stekycz/NetteSesame"
 	},
+	"minimum-stability": "dev",
 	"require": {
 		"nette/nette": ">=2.0.0",
 		"kdyby/curl": ">=1.0.0"
