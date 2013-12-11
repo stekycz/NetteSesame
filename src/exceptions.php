@@ -17,6 +17,13 @@ class LogicException extends \LogicException
 
 
 
+class MissingDsnException extends RuntimeException
+{
+
+}
+
+
+
 class BadStatusException extends RuntimeException
 {
 

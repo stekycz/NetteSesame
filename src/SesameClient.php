@@ -56,8 +56,11 @@ class SesameClient extends Object
 	 * @param string $sesameUrl Sesame server connection string
 	 * @param string $repository The repository name
 	 */
-	public function __construct($sesameUrl = 'http://localhost:8080/openrdf-sesame', $repository = NULL)
+	public function __construct($sesameUrl, $repository = NULL)
 	{
+		if (empty($sesameUrl)) {
+			throw new MissingDsnException('Sesame connection URL is missing. Please supply valid DSN.');
+		}
 		$this->dsn = $sesameUrl;
 		$this->setRepository($repository);
 	}
