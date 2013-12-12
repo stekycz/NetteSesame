@@ -45,7 +45,7 @@ class SesameResult extends Object
 	/**
 	 * Returns the rows in an array format, false if there are no rows.
 	 *
-	 * @return array|bool
+	 * @return array
 	 */
 	public function getRows()
 	{
@@ -70,10 +70,6 @@ class SesameResult extends Object
 				}
 			}
 			$rows[] = $row;
-		}
-
-		if (count($rows) <= 0) {
-			return FALSE;
 		}
 
 		return $rows;
